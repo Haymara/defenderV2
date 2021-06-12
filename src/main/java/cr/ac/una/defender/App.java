@@ -37,7 +37,7 @@ public class App extends Application {
         Clip clip = AudioSystem.getClip();
         clip.open(audioStream);
         
-        clip.start();*/ 
+        clip.start(); 
       (new Thread(){
           public void run(){
           com.sun.javafx.application.PlatformImpl.startup(()->{});
@@ -48,7 +48,7 @@ public class App extends Application {
           MediaPlayer player = new MediaPlayer(media);
           player.play(); 
           }
-      }).start();
+      }).start();*/
     }
 
     public static void main(String[] args) {

@@ -47,8 +47,6 @@ public class LoginViewController extends Controller implements Initializable {
     @FXML
     private Label labelNuevoUsu;
     @FXML
-    private JFXButton btnAvatar;
-    @FXML
     private AnchorPane root;
     
     private JugadorDto jugadorDto;
@@ -59,7 +57,7 @@ public class LoginViewController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       txtUsuario.setTextFormatter(Formato.getInstance().letrasFormat(15));
-      nuevoUsuario();
+      /*nuevoUsuario();*/
     }    
     
     private void bindUsuario(Boolean nuevo){
@@ -70,13 +68,13 @@ public class LoginViewController extends Controller implements Initializable {
         txtUsuario.textProperty().unbindBidirectional(jugadorDto.nombreUsuario);
     }
 
-    private void nuevoUsuario(){
+   /* private void nuevoUsuario(){
         unbindUsuario();
         jugadorDto = new JugadorDto();
         bindUsuario(true);
         txtUsuario.clear();
         txtUsuario.requestFocus();
-    }
+    }*/
 
     @FXML
     private void onActionBtnIngresar(ActionEvent event) {
@@ -119,15 +117,6 @@ public class LoginViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionLabelNuevoUsu(MouseEvent event) {
-        if(new Mensaje().showConfirmation("Nuevo Usuario", getStage(), "Esta seguro que desea registrar un nuevo usuario?"))
             FlowController.getInstance().goViewInWindowModal("Registro", this.getStage(), Boolean.TRUE);
-    }
-
-    @FXML
-    private void onActionBtnAvatar(ActionEvent event) {
-        FileChooser filechooser = new FileChooser();
-        filechooser.setTitle("Explorador de archivos");
-        Stage stage = (Stage)root.getScene().getWindow();
-        filechooser.showOpenDialog(stage);
-    }    
+    }   
 }

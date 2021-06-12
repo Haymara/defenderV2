@@ -51,11 +51,6 @@
                                           <Insets />
                                        </VBox.margin>
                                     </HBox>
-                                    <JFXButton fx:id="btnAvatar" onAction="#onActionBtnAvatar" text="Elegir Avatar">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="120.0" top="5.0" />
-                                       </VBox.margin>
-                                    </JFXButton>
                                     <Label fx:id="labelNuevoUsu" onMouseClicked="#onActionLabelNuevoUsu" styleClass="jfx-text-field" text="Registrar nuevo usuario" textAlignment="CENTER" textFill="#006bff" underline="true">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
