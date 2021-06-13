@@ -6,6 +6,7 @@
 package cr.ac.una.defender.controller;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.defender.clases.Juego;
 import cr.ac.una.defender.model.JugadorDto;
 import cr.ac.una.defender.model.PartidaDto;
 import cr.ac.una.defender.util.FlowController;
@@ -15,9 +16,14 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  * FXML Controller class
@@ -43,7 +49,10 @@ public class GameViewController extends Controller implements Initializable {
     @FXML
     private JFXButton btnHechizoHielo;
     
+    private Juego juego;
     private PartidaDto partidaDto;
+    @FXML
+    private BorderPane root;
 
     /**
      * Initializes the controller class.
@@ -51,9 +60,10 @@ public class GameViewController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         /*lblPuntaje.setTextFormatter(Formato.getInstance().integerFormat());*/
-        nuevaPartida();
+       // nuevaPartida();
+        juego = new Juego(lblPuntaje);
     } 
-    
+    /*
     public void bindPartida(Boolean nuevo){
         lblPuntaje.textProperty().bindBidirectional(partidaDto.puntaje);
         lblNivel.textProperty().bindBidirectional(partidaDto.nivel);
@@ -62,12 +72,12 @@ public class GameViewController extends Controller implements Initializable {
     public void unbindPartida(){
         lblPuntaje.textProperty().unbindBidirectional(partidaDto.puntaje);
         lblNivel.textProperty().unbindBidirectional(partidaDto.nivel);
-    }
+    }*/
     
     private void nuevaPartida(){
-    unbindPartida();
+  //  unbindPartida();
     partidaDto = new PartidaDto();
-    bindPartida(true);
+    //bindPartida(true);
     }
 
     @Override

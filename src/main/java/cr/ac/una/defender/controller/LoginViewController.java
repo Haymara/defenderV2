@@ -59,7 +59,7 @@ public class LoginViewController extends Controller implements Initializable {
       txtUsuario.setTextFormatter(Formato.getInstance().letrasFormat(15));
       /*nuevoUsuario();*/
     }    
-    
+  
     private void bindUsuario(Boolean nuevo){
         txtUsuario.textProperty().bindBidirectional(jugadorDto.nombreUsuario);
     }
@@ -85,8 +85,9 @@ public class LoginViewController extends Controller implements Initializable {
           }else{
                 AppContext.getInstance().set("Usuario", txtUsuario.getText());
                //FlowController.getInstance().goMain(); para ingresar a la ventana principal
-               FlowController.getInstance().goViewInWindow("GameView");
                 getStage().close();
+               FlowController.getInstance().goViewInWindow("GameView");
+               
             }
         }catch(Exception ex){
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, "Error ingresando", ex);
@@ -107,7 +108,7 @@ public class LoginViewController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-        this.txtUsuario.setText("");
+       // this.txtUsuario.setText("");
     }
 
     @FXML
