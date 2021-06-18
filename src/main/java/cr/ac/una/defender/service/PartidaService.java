@@ -1,16 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cr.ac.una.defender.service;
 
-import cr.ac.una.defender.model.PartidaDto;
+import cr.ac.una.defender.model.Game;
+import cr.ac.una.defender.model.GameDto;
+import cr.ac.una.defender.util.EntityManagerHelper;
 import cr.ac.una.defender.util.Respuesta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -18,24 +18,16 @@ import java.util.logging.Logger;
  */
 public class PartidaService {
     
-    public Respuesta getPartida(String usuario) {
-        try {      
-            PartidaDto partida = new PartidaDto();
-            return new Respuesta(true, "", "", "Partida", partida);
-        } catch (Exception ex) {
-            Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo el usuario [" + usuario + "]", ex);
-            return new Respuesta(false, "Error obteniendo el usuario.", "getUsuario " + ex.getMessage());
-        }
-    }
+    EntityManager em = EntityManagerHelper.getInstance().getManager();
+    private EntityTransaction et;
     
     public Respuesta getPartida(Long id) {
         try {
-            
-            PartidaDto partida = new PartidaDto();
-           /* partida.setId(1L);
-            partida.nombre.setValue("Carlos");
-            partida.pApellido.setValue("Carranza");*/
-            return new Respuesta(true, "", "", "Partida", partida);
+            TypedQuery<Game> query = em.createNamedQuery("Game.findByGamId", Game.class);
+            query.setParameter("id", query);
+            //JugadorDto jugador = new JugadorDto();
+
+            return new Respuesta(true, "", "", "Partida", new GameDto(query.getSingleResult()));
         } catch (Exception ex) {
             Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo el partida [" + id + "]", ex);
             return new Respuesta(false, "Error obteniendo el partida.", "getPartida " + ex.getMessage());
@@ -44,7 +36,7 @@ public class PartidaService {
     
     public Respuesta getPartidas(String nombre) {
         try {
-            List<PartidaDto> partidas = new ArrayList<>();
+            List<GameDto> partidas = new ArrayList<>();
             return new Respuesta(true, "", "", "Partidas", partidas);
         } catch (Exception ex) {
             Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error obteniendo partidas.", ex);
@@ -52,10 +44,10 @@ public class PartidaService {
         }
     }
     
-    public Respuesta guardarPartida(PartidaDto partida) {
+    public Respuesta guardarPartida(GameDto partida) {
         try {
             
-            return new Respuesta(true, "", "", "Partida", new PartidaDto());
+            return new Respuesta(true, "", "", "Partida", new GameDto());
         } catch (Exception ex) {
             Logger.getLogger(PartidaService.class.getName()).log(Level.SEVERE, "Error guardando el partida.", ex);
             return new Respuesta(false, "Error guardando el partida.", "guardarPartida " + ex.getMessage());

@@ -25,15 +25,13 @@ public class PrincipalViewController extends Controller implements Initializable
     @FXML
     private AnchorPane root;
     @FXML
-    private JFXButton btnMusica;
-    @FXML
-    private ImageView imvMusica;
-    @FXML
-    private JFXButton btnStart;
-    @FXML
-    private JFXButton btnEstadistica;
-    @FXML
     private JFXButton btnInicio;
+    @FXML
+    private JFXButton btnPuntaje;
+    @FXML
+    private JFXButton btnBallesta;
+    @FXML
+    private JFXButton btnHelp;
 
     /**
      * Initializes the controller class.
@@ -43,15 +41,11 @@ public class PrincipalViewController extends Controller implements Initializable
         // TODO
     }    
 
-    @FXML
     private void onActionBtnStart(ActionEvent event) {
         getStage().close();
         
     }
 
-    @FXML
-    private void onActionBtnEstadistica(ActionEvent event) {
-    }
 
     @Override
     public void initialize() {
@@ -60,6 +54,21 @@ public class PrincipalViewController extends Controller implements Initializable
     @FXML
     private void onActionBtnInicio(ActionEvent event) {
         getStage().close();
+        FlowController.getInstance().goViewInWindow("GameView");
+    }
+
+    @FXML
+    private void onActionBtnPuntaje(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnBallesta(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnHelp(ActionEvent event) {
+        getStage().close();
+        FlowController.getInstance().goViewInWindow("HelpView");
     }
     
 }

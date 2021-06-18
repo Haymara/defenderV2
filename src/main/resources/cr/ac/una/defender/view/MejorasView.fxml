@@ -9,27 +9,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="396.0" prefWidth="650.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.defender.controller.MejorasViewController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="396.0" prefWidth="650.0" styleClass="root" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.defender.controller.MejorasViewController">
    <children>
-      <HBox layoutX="98.0" layoutY="59.0" prefHeight="279.0" prefWidth="472.0">
+      <HBox layoutX="59.0" layoutY="51.0" prefHeight="279.0" prefWidth="472.0">
          <children>
             <VBox prefHeight="274.0" prefWidth="144.0">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
                <children>
-                  <JFXButton prefHeight="40.0" prefWidth="112.0" text="Defender">
+                  <JFXButton fx:id="btnTorre" onMouseClicked="#OnMouseClikedBtnTorre" prefHeight="40.0" prefWidth="112.0" text="Defender">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="10.0" top="40.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton layoutX="30.0" layoutY="20.0" prefHeight="42.0" prefWidth="112.0" text="City Wall">
+                  <JFXButton fx:id="btnCastillo" layoutX="30.0" layoutY="20.0" onMouseClicked="#OnMouseClikedCastillo" prefHeight="42.0" prefWidth="112.0" text="City Wall">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="10.0" top="2.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="55.0" prefHeight="40.0" prefWidth="112.0" text="Magic Tower">
+                  <JFXButton fx:id="btnElixir" layoutX="10.0" layoutY="55.0" onMouseClicked="#OnMouseClickedBtnElixir" prefHeight="40.0" prefWidth="112.0" text="Magic Tower">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="10.0" top="25.0" />
                      </VBox.margin>
@@ -64,22 +63,22 @@
                   <Insets bottom="10.0" left="25.0" right="10.0" top="10.0" />
                </HBox.margin>
                <children>
-                  <JFXButton prefHeight="36.0" prefWidth="130.0" text="Fuerza">
+                  <JFXButton fx:id="btnTorreAd" onMouseClicked="#OnMouseClikedBtnTorreAd" prefHeight="36.0" prefWidth="130.0" text="Fuerza">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton layoutX="20.0" layoutY="20.0" prefHeight="36.0" prefWidth="129.0" text="Agility">
+                  <JFXButton fx:id="btnTorreRango" layoutX="20.0" layoutY="20.0" onMouseClicked="#OnMousedClickedBtnTorreRango" prefHeight="36.0" prefWidth="129.0" text="Agility">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="40.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton layoutX="20.0" layoutY="104.0" prefHeight="36.0" prefWidth="130.0" text="Bola de Fuego">
+                  <JFXButton fx:id="btnHechizoFuego" layoutX="20.0" layoutY="104.0" onMouseClicked="#OnMousedClickedBtnHechizoFuego" prefHeight="36.0" prefWidth="130.0" text="Bola de Fuego">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton layoutX="20.0" layoutY="158.0" prefHeight="36.0" prefWidth="130.0" text="Glacial Spike">
+                  <JFXButton fx:id="btnHizoHielo" layoutX="20.0" layoutY="158.0" onMouseClicked="#OnMousedClickedHechizoHielo" prefHeight="36.0" prefWidth="130.0" text="Glacial Spike">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
                      </VBox.margin>
@@ -88,20 +87,30 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="404.0" prefHeight="67.0" prefWidth="232.0">
+      <HBox layoutX="397.0" prefHeight="67.0" prefWidth="239.0">
          <children>
             <Label text="Puntuacion:">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Label>
-            <Label text="Nivel: ">
+            <Label fx:id="lblPuntuje" text="0">
                <HBox.margin>
-                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label layoutX="20.0" layoutY="20.0" text="Nivel: ">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="lblNivel" layoutX="185.0" layoutY="20.0" text="1">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Label>
          </children>
       </HBox>
-      <JFXButton layoutX="521.0" layoutY="339.0" prefHeight="36.0" prefWidth="97.0" text="Continuar" />
+      <JFXButton fx:id="btnContinuar" layoutX="521.0" layoutY="339.0" onAction="#OnActionBtnContinuar" prefHeight="36.0" prefWidth="97.0" text="Continuar" />
    </children>
 </AnchorPane>

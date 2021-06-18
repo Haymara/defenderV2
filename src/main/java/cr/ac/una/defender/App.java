@@ -10,12 +10,30 @@ import java.io.IOException;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 /**
  * JavaFX App
  */
@@ -27,32 +45,20 @@ public class App extends Application {
     public void start(Stage stage) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
       FlowController.getInstance().InitializeFlow(stage, null);
       stage.setTitle("DEFENDER");
-      FlowController.getInstance().goViewInWindow("LoginView");//para mostrar por medio de un flowcontroller una vista en una ventana nueva
-      /*AudioClip audio = new AudioClip("cr/ac/una/defender/resources/MusicaFondoDefender.mp3");
-      audio.play();
-      audio.setVolume(0.85);*/
-      
-      /*File file = new File("cr/ac/una/defender/resources/MusicaFondoDefender.wav");
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioStream);
-        
-        clip.start(); 
-      (new Thread(){
+      FlowController.getInstance().goViewInWindow("LoginView");
+        (new Thread(){
           public void run(){
           com.sun.javafx.application.PlatformImpl.startup(()->{});
       
-          final String musicaFondo = "MusicaFondoDefender.wav";
-          File file = new File(musicaFondo);
-          Media media = new Media(file.toURI().toString());
+          Media media = new Media(App.class.getResource("resources/MusicaFondoDefender.wav").toString());
           MediaPlayer player = new MediaPlayer(media);
           player.play(); 
           }
-      }).start();*/
-    }
+      }).start(); 
+   }
 
     public static void main(String[] args) {
         launch();
     }
-
 }
+   

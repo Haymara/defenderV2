@@ -5,25 +5,27 @@
  */
 package cr.ac.una.defender.controller;
 
+
 import com.jfoenix.controls.JFXButton;
-import cr.ac.una.defender.clases.Juego;
-import cr.ac.una.defender.model.JugadorDto;
-import cr.ac.una.defender.model.PartidaDto;
+import cr.ac.una.defender.controller.clases.Juego;
+import cr.ac.una.defender.model.GameDto;
+
+
+
+
 import cr.ac.una.defender.util.FlowController;
-import cr.ac.una.defender.util.Formato;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
 /**
  * FXML Controller class
@@ -48,11 +50,22 @@ public class GameViewController extends Controller implements Initializable {
     private JFXButton btnHechizoFuego;
     @FXML
     private JFXButton btnHechizoHielo;
-    
-    private Juego juego;
-    private PartidaDto partidaDto;
+   
+    private GameDto gameDto;
     @FXML
     private BorderPane root;
+    @FXML
+    private ImageView imvBallesta;
+   double initMx, initMy,initX, initY;
+    @FXML
+    private JFXButton btnMaas;
+    @FXML
+    private JFXButton btnMenos;
+    
+    private double progresso;
+    private double valor;
+ 
+     private Juego tablero;
 
     /**
      * Initializes the controller class.
@@ -61,8 +74,15 @@ public class GameViewController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         /*lblPuntaje.setTextFormatter(Formato.getInstance().integerFormat());*/
        // nuevaPartida();
-        juego = new Juego(lblPuntaje);
-    } 
+     
+        tablero = new Juego(lblPuntaje, lblNivel);
+        AnchorPane pane = new AnchorPane();
+        pane.setPadding(new Insets(0, 0, 0, 0));
+        pane.getChildren().add(tablero);    
+        
+        root.setCenter(pane);
+    }
+
     /*
     public void bindPartida(Boolean nuevo){
         lblPuntaje.textProperty().bindBidirectional(partidaDto.puntaje);
@@ -76,7 +96,7 @@ public class GameViewController extends Controller implements Initializable {
     
     private void nuevaPartida(){
   //  unbindPartida();
-    partidaDto = new PartidaDto();
+    gameDto = new GameDto();
     //bindPartida(true);
     }
 
@@ -95,6 +115,27 @@ public class GameViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionHechizoHielo(ActionEvent event) {
+    }
+
+    @FXML
+    private void onMouseClickedImvBallesta(MouseEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnMas(ActionEvent event) {
+        if(valor<1){
+        valor = ++progresso/100;
+        pgbSaludCastillo.setProgress(valor);
+    } System.out.println(valor);
+    }
+
+    @FXML
+    private void onActionBtnMenos(ActionEvent event) {
+          if(valor>(-0.2)){
+        valor = --progresso/100;
+       pgbSaludCastillo.setProgress(valor);
+    }
+          System.out.println(valor);
     }
     
 }

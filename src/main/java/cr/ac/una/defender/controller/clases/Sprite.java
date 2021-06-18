@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cr.ac.una.defender.clases;
+package cr.ac.una.defender.controller.clases;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,8 +13,8 @@ import javafx.scene.layout.Pane;
  *
  * @author Haymara
  */
-
 public abstract class Sprite {
+    
     Image image;
     ImageView imageView;
 
@@ -201,7 +201,7 @@ public abstract class Sprite {
     }
 
     /**
-     * Reduce la salud por la cantidad de daño que el sprite dado puede infligir.
+     * Reduce health by the amount of damage that the given sprite can inflict
      * @param sprite
      */
     public void getDamagedBy( Sprite sprite) {
@@ -209,21 +209,21 @@ public abstract class Sprite {
     }
 
     /**
-     *Establece la salud en 0
+     * Set health to 0
      */
     public void kill() {
-        setHealth(0);
+        setHealth( 0);
     }
 
     /**
-     *Establecer marca que el sprite se puede eliminar de la interfaz de usuario.
+     * Set flag that the sprite can be removed from the UI.
      */
     public void remove() {
         setRemovable(true);
     }
 
     /**
-     * Coloca la bandera de que el sprite ya no puede moverse.
+     * Set flag that the sprite can't move anymore.
      */
     public void stopMovement() {
         this.canMove = false;

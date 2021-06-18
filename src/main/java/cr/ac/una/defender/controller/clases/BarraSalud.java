@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cr.ac.una.defender.clases;
+package cr.ac.una.defender.controller.clases;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,41 +14,37 @@ import javafx.scene.shape.StrokeType;
  *
  * @author Haymara
  */
-public class Salud extends Pane {
-
-    public Salud(Rectangle outerHealthRect, Rectangle innerHealthRect) {
-        this.outerHealthRect = outerHealthRect;
-        this.innerHealthRect = innerHealthRect;
-    }
+public class BarraSalud extends Pane {
 
     Rectangle outerHealthRect;
     Rectangle innerHealthRect;
 
-    public Salud() {
+    public BarraSalud() {
 
-        int height = 10;
+        double height = 10;
 
-        int outerWidth = 60;
-        int innerWidth = 40;
+        double outerWidth = 60;
+        double innerWidth = 40;
 
-        int x=0;
-        int y=0;
-        
-        outerHealthRect = new Rectangle(x, y, 60, 60);
+        double x=0.0;
+        double y=0.0;
+
+        outerHealthRect = new Rectangle( x, y, outerWidth, height);
         outerHealthRect.setStroke(Color.BLACK);
         outerHealthRect.setStrokeWidth(2);
         outerHealthRect.setStrokeType( StrokeType.OUTSIDE);
         outerHealthRect.setFill(Color.RED);
 
         innerHealthRect = new Rectangle( x, y, innerWidth, height);
-     
-        
-        getChildren().addAll(outerHealthRect,innerHealthRect);
+        innerHealthRect.setStrokeType( StrokeType.OUTSIDE);
+        innerHealthRect.setFill(Color.LIMEGREEN);
+
+        getChildren().addAll( outerHealthRect, innerHealthRect);
 
     }
 
     public void setValue( double value) {
-        innerHealthRect.setWidth(outerHealthRect.getWidth()*value);
+        innerHealthRect.setWidth( outerHealthRect.getWidth() * value);
     }
 
 }

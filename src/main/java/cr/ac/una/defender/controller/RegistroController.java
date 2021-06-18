@@ -7,14 +7,20 @@ package cr.ac.una.defender.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.defender.model.JugadorDto;
+import cr.ac.una.defender.service.JugadorService;
 import cr.ac.una.defender.util.Formato;
 import cr.ac.una.defender.util.Mensaje;
+import cr.ac.una.defender.util.Respuesta;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -44,6 +50,8 @@ public class RegistroController extends Controller implements Initializable {
     private AnchorPane root;
     @FXML
     private ImageView imvAvatar;
+    
+     private JugadorDto jugadorDto;
 
     /**
      * Initializes the controller class.
@@ -51,8 +59,39 @@ public class RegistroController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        txtUsuario.setTextFormatter(Formato.getInstance().letrasFormat(15));
+       jugadorDto = new JugadorDto();
+       nuevoUsuario();
     }    
 
+         
+    private void bindUsuario(Boolean nuevo){
+        txtUsuario.textProperty().bindBidirectional(jugadorDto.nombreUsuario);
+    }
+    
+    private void unbindUsuario(){
+        txtUsuario.textProperty().unbindBidirectional(jugadorDto.nombreUsuario);
+    }
+    
+    private void nuevoUsuario(){
+        unbindUsuario();
+        jugadorDto = new JugadorDto();
+        bindUsuario(true);
+        txtUsuario.clear();
+        txtUsuario.requestFocus();
+    }
+    
+    private void cargarUsuario(Long id) {
+        JugadorService service = new JugadorService();
+        Respuesta respuesta = service.getUsuario(id);
+
+        if (respuesta.getEstado()) {
+            unbindUsuario();
+            jugadorDto = (JugadorDto) respuesta.getResultado("Jugador");
+            bindUsuario(false);
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar usuario", getStage(), respuesta.getMensaje());
+        }
+    }
 
     @FXML
     private void onActionBtnNuevo(ActionEvent event) {
@@ -71,6 +110,22 @@ public class RegistroController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {
+         try{
+            JugadorService service = new JugadorService();
+            Respuesta respuesta = service.guardarJugador(jugadorDto);
+            if (!respuesta.getEstado()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), respuesta.getMensaje());
+            } else {
+            unbindUsuario();
+            jugadorDto = (JugadorDto) respuesta.getResultado("Jugador");
+            bindUsuario(false);
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar usuario", getStage(), "Usuario actualizado correctamente.");
+            }
+        }
+            catch (Exception ex) {
+            Logger.getLogger(RegistroController.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar usuario", getStage(), "Ocurrio un error guardando el usuario.");
+        }
     }
 
     @Override

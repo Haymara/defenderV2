@@ -11,23 +11,37 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author duwan
  */
+
 public class JugadorDto {
     
+    public SimpleStringProperty id;
     public SimpleStringProperty nombreUsuario;
     public String ballesta;
     public Long nivel;
     
     
     
-     public JugadorDto() {
+    public JugadorDto() {
          this.nombreUsuario = new SimpleStringProperty();
+         this.id = new SimpleStringProperty();
     }
      
-   /* public JugadorDto(Jugador jugador){
-        this.nombreUsuario.set(jugador.getNombre());
-        
-    }*/
+    public JugadorDto(Jugador jugador){
+        this();
+        this.nombreUsuario.set(jugador.getNombreusuario());
+        this.id.set(jugador.getId().toString()); 
+    }
 
+    public Long getId() {
+        if (id.get()!=null && !id.get().isEmpty())
+            return Long.valueOf(id.get());
+        return null;
+    }
+
+    public void setId(Long id) {
+         this.id.setValue(id.toString());
+    }
+    
     public String getNombreUsuario() {
         return nombreUsuario.get();
     }
@@ -55,7 +69,8 @@ public class JugadorDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("JugadorDto{nombreUsuario=").append(nombreUsuario);
+        sb.append("JugadorDto{nombreUsuario=").append(nombreUsuario.get());
+        //sb.append(", id=").append(id.get());
         sb.append(", ballesta=").append(ballesta);
         sb.append(", nivel=").append(nivel);
         sb.append('}');
